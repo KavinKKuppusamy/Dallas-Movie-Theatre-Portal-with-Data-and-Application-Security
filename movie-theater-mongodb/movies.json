@@ -1,0 +1,315 @@
+{ 
+    "_id" : ObjectId("5fc44d94a69e7a12ca723639"), 
+    "title" : "Bad boys for life", 
+    "genre" : "action", 
+    "length" : "2h 4m", 
+    "synopsys" : "The wife and son of a Mexican drug lord embark on a vengeful quest to kill all those involved in his trial and imprisonment -- including Miami Detective Mike Lowrey. When Mike gets wounded, he teams up with partner Marcus Burnett and AMMO -- a special tactical squad -- to bring the culprits to justice.", 
+    "image" : "bbfl.jpg", 
+    "showTimings" : {
+        "1" : "10:00 am", 
+        "2" : "01:00 pm", 
+        "3" : "05:00 pm"
+    }, 
+    "availableUntil" : ISODate("2020-12-25T23:59:59.000+0000"), 
+    "status" : "A"
+}
+{ 
+    "_id" : ObjectId("5fc452a0a69e7a12ca7237b1"), 
+    "title" : "Wonder women 1984", 
+    "genre" : "fantasy", 
+    "length" : "2h 31m", 
+    "synopsys" : "Wonder Woman squares off against Maxwell Lord and the Cheetah, a villainess who possesses superhuman strength and agility.", 
+    "image" : "ww.jpg", 
+    "showTimings" : {
+        "1" : "09:00 am", 
+        "2" : "02:00 pm", 
+        "3" : "06:00 pm"
+    }, 
+    "availableUntil" : ISODate("2020-12-30T23:59:59.000+0000"), 
+    "status" : "A"
+}
+{ 
+    "_id" : ObjectId("5fc452c3a69e7a12ca7237bf"), 
+    "title" : "Ford V Ferrari", 
+    "genre" : "drama", 
+    "length" : "2h 32m", 
+    "synopsys" : "American automotive designer Carroll Shelby and fearless British race car driver Ken Miles battle corporate interference, the laws of physics and their own personal demons to build a revolutionary vehicle for the Ford Motor Co. Together, they plan to compete against the race cars of Enzo Ferrari at the 24 Hours of Le Mans in France in 1966.", 
+    "image" : "fvf.jpeg", 
+    "showTimings" : {
+        "1" : "05:00 pm", 
+        "2" : "08:00 pm", 
+        "3" : "11:00 pm"
+    }, 
+    "availableUntil" : ISODate("2020-11-25T23:59:59.000+0000"), 
+    "status" : "A"
+}
+{ 
+    "_id" : ObjectId("5fc5ea92d09afb893c420e7a"), 
+    "title" : "The Eternals 2021", 
+    "genre" : "scifi", 
+    "length" : "2h 40m", 
+    "synopsys" : "The saga of the Eternals, a race of immortal beings who lived on Earth and shaped its history and civilisations.", 
+    "image" : "eternals.jpg", 
+    "availableUntil" : ISODate("2020-12-22T00:00:00.000+0000"), 
+    "status" : "A", 
+    "showTimings" : {
+        "1" : "01:00 pm", 
+        "2" : "06:00 pm"
+    }
+}
+{ 
+    "_id" : ObjectId("5fc80e5413981a85e1af3923"), 
+    "title" : "Tenet", 
+    "genre" : "scifi", 
+    "length" : "2h 30m", 
+    "synopsys" : "A secret agent embarks on a dangerous, time-bending mission to prevent the start of World War III.", 
+    "image" : "tenet.jpg", 
+    "availableUntil" : ISODate("2020-12-30T00:00:00.000+0000"), 
+    "showTimings" : {
+        "1" : "01:00 pm", 
+        "2" : "06:00 pm"
+    }, 
+    "status" : "A"
+}
+{ 
+    "_id" : ObjectId("5fc80f56b6799705c9bd719e"), 
+    "title" : "2067", 
+    "genre" : "scifi", 
+    "length" : "1h 54m", 
+    "synopsys" : "When Earth's air becomes unbreathable, a message from the future sends a man on a dangerous mission to an unknown world to save the human race.", 
+    "image" : "2067.jpg", 
+    "availableUntil" : ISODate("2020-12-22T00:00:00.000+0000"), 
+    "showTimings" : {
+        "1" : "10:00 am", 
+        "2" : "02:00 pm", 
+        "3" : "07:00 pm"
+    }, 
+    "status" : "A"
+}
+{ 
+    "_id" : ObjectId("5fc80fd8b6799705c9bd719f"), 
+    "title" : "Hillbilly Elegy", 
+    "genre" : "drama", 
+    "length" : "1h 56m", 
+    "synopsys" : "A Yale Law student drawn back to his Appalachian hometown reflects on his family's history and his own future.", 
+    "image" : "he.jpg", 
+    "availableUntil" : ISODate("2021-01-11T00:00:00.000+0000"), 
+    "showTimings" : {
+        "1" : "10:00 am", 
+        "2" : "02:00 pm", 
+        "3" : "10:00 pm"
+    }, 
+    "status" : "A"
+}
+{ 
+    "_id" : ObjectId("5fc81085b6799705c9bd71a0"), 
+    "title" : "Superintelligence", 
+    "genre" : "Action", 
+    "length" : "1h 46m", 
+    "synopsys" : "When a powerful superintelligence chooses to study Carol, the most average person on Earth, the fate of the world hangs in the balance. As the AI decides whether to enslave, save, or destroy humanity, it's up to Carol to prove people are worth saving.", 
+    "image" : "superintelligence.jpg", 
+    "availableUntil" : ISODate("2021-01-17T00:00:00.000+0000"), 
+    "showTimings" : {
+        "1" : "10:00 am", 
+        "2" : "02:00 pm", 
+        "3" : "10:00 pm"
+    }, 
+    "status" : "A"
+}
+{ 
+    "_id" : ObjectId("5fc810f7b6799705c9bd71a1"), 
+    "title" : "The Trial of the Chicago 7", 
+    "genre" : "drama", 
+    "length" : "2h 10m", 
+    "synopsys" : "The film is based on the infamous 1969 trial of seven defendants charged by the federal government with conspiracy and more, arising from the countercultural protests in Chicago at the 1968 Democratic National Convention. The trial transfixed the nation and sparked a conversation about mayhem intended to undermine the U.S. government.", 
+    "image" : "chicago-poster.jpg", 
+    "availableUntil" : ISODate("2021-01-31T00:00:00.000+0000"), 
+    "showTimings" : {
+        "1" : "01:00 pm", 
+        "2" : "06:00 pm"
+    }, 
+    "status" : "A"
+}
+{ 
+    "_id" : ObjectId("5fc81174b6799705c9bd71a2"), 
+    "title" : "Hard Kill", 
+    "genre" : "action", 
+    "length" : "1h 38m", 
+    "synopsys" : "Mercenaries race against the clock to stop a madman from using a computer program to wreak havoc around the globe.", 
+    "image" : "hardkill.jpg", 
+    "availableUntil" : ISODate("2020-12-30T00:00:00.000+0000"), 
+    "showTimings" : {
+        "1" : "10:00 am", 
+        "2" : "02:00 pm", 
+        "3" : "10:00 pm"
+    }, 
+    "status" : "A"
+}
+{ 
+    "_id" : ObjectId("5fc811e8b6799705c9bd71a3"), 
+    "title" : "The New Mutants", 
+    "genre" : "horror", 
+    "length" : "1h 39m", 
+    "synopsys" : "Five teenage mutants -- Mirage, Wolfsbane, Cannonball, Sunspot and Magik -- undergo treatments at a secret institution that will cure them of their dangerous powers. Invited by Dr. Cecilia Reyes to share their stories, their memories soon turn into terrifying realities as they start to question why they're being held and who's trying to destroy them.", 
+    "image" : "IMAX_The-New-Mutants-scaled.jpg", 
+    "availableUntil" : ISODate("2021-02-09T00:00:00.000+0000"), 
+    "showTimings" : {
+        "1" : "01:00 pm", 
+        "2" : "06:00 pm"
+    }, 
+    "status" : "A"
+}
+{ 
+    "_id" : ObjectId("5fc8126db6799705c9bd71a4"), 
+    "title" : "Extraction", 
+    "genre" : "action", 
+    "length" : "1h 57m", 
+    "synopsys" : "A black-market mercenary who has nothing to lose is hired to rescue the kidnapped son of an imprisoned international crime lord. But in the murky underworld of weapons dealers and drug traffickers, an already deadly mission approaches the impossible.", 
+    "image" : "extraction.jpg", 
+    "availableUntil" : ISODate("2021-01-12T00:00:00.000+0000"), 
+    "showTimings" : {
+        "1" : "10:00 am", 
+        "2" : "02:00 pm", 
+        "3" : "10:00 pm"
+    }, 
+    "status" : "A"
+}
+{ 
+    "_id" : ObjectId("5fc812fbb6799705c9bd71a5"), 
+    "title" : "Legacy of Lies", 
+    "genre" : "action", 
+    "length" : "1h 41m", 
+    "synopsys" : "A former MI6 agent teams up with a Ukrainian journalist to uncover the truth behind Russian covert operations.", 
+    "image" : "legacylies.jpg", 
+    "availableUntil" : ISODate("2021-01-13T00:00:00.000+0000"), 
+    "showTimings" : {
+        "1" : "10:00 am", 
+        "2" : "02:00 pm", 
+        "3" : "07:00 pm"
+    }, 
+    "status" : "A"
+}
+{ 
+    "_id" : ObjectId("5fc81399b6799705c9bd71a6"), 
+    "title" : "Irresistible", 
+    "genre" : "drama", 
+    "length" : "1h 42m", 
+    "synopsys" : "A Democratic political consultant helps a retired Marine colonel run for mayor in a small Wisconsin town.", 
+    "image" : "irresistible.jpg", 
+    "availableUntil" : ISODate("2020-12-31T00:00:00.000+0000"), 
+    "showTimings" : {
+        "1" : "01:00 pm", 
+        "2" : "06:00 pm"
+    }, 
+    "status" : "A"
+}
+{ 
+    "_id" : ObjectId("5fc813ffb6799705c9bd71a7"), 
+    "title" : "Tesla (2020 film)", 
+    "genre" : "drama", 
+    "length" : "1h 42m", 
+    "synopsys" : "Visionary inventor Nikola Tesla fights an uphill battle to bring his revolutionary electrical system to fruition, then faces thornier challenges with his new system for worldwide wireless energy.", 
+    "image" : "tesla.jpg", 
+    "availableUntil" : ISODate("2020-12-31T00:00:00.000+0000"), 
+    "showTimings" : {
+        "1" : "10:00 am", 
+        "2" : "02:00 pm", 
+        "3" : "10:00 pm"
+    }, 
+    "status" : "A"
+}
+{ 
+    "_id" : ObjectId("5fc8147cb6799705c9bd71a8"), 
+    "title" : "Antebellum", 
+    "genre" : "horror", 
+    "length" : "1h 45m", 
+    "synopsys" : "Successful author Veronica Henley is finishing a book tour before she returns home to her husband and daughter. But a shocking turn of events is about to upend Veronica's existence, plunging her into a horrifying reality that forces her to confront her past, present and future -- before it's too late.", 
+    "image" : "ante.jpg", 
+    "availableUntil" : ISODate("2021-01-27T00:00:00.000+0000"), 
+    "showTimings" : {
+        "1" : "10:00 am", 
+        "2" : "02:00 pm", 
+        "3" : "10:00 pm"
+    }, 
+    "status" : "A"
+}
+{ 
+    "_id" : ObjectId("5fc814e1b6799705c9bd71a9"), 
+    "title" : "Mulan", 
+    "genre" : "action", 
+    "length" : "2h", 
+    "synopsys" : "To save her ailing father from serving in the Imperial Army, a fearless young woman disguises herself as a man to battle northern invaders in China.", 
+    "image" : "mulan.jpg", 
+    "availableUntil" : ISODate("2021-02-23T00:00:00.000+0000"), 
+    "showTimings" : {
+        "1" : "01:00 pm", 
+        "2" : "06:00 pm"
+    }, 
+    "status" : "A"
+}
+{ 
+    "_id" : ObjectId("5fc88f95220524f87b45a3e1"), 
+    "title" : "The 2nd", 
+    "genre" : "action", 
+    "length" : "1h 45m", 
+    "synopsys" : "A Secret Service agent must save his son and the daughter of a Supreme Court justice from armed terrorists.", 
+    "image" : "2nd.jpg", 
+    "availableUntil" : ISODate("2020-12-31T00:00:00.000+0000"), 
+    "showTimings" : {
+        "1" : "01:00 pm"
+    }, 
+    "status" : "A"
+}
+{ 
+    "_id" : ObjectId("5fc8908950a558fa1a5f9575"), 
+    "title" : "Archenemy", 
+    "genre" : "action", 
+    "length" : "1h 30m", 
+    "synopsys" : "A teen meets a mysterious man who claims he lost his superpowers after arriving from another dimension. Together, they take to the streets to wipe out a vicious crime boss and his local drug syndicate.", 
+    "image" : "archenemyposter.jpg", 
+    "availableUntil" : ISODate("2020-12-24T00:00:00.000+0000"), 
+    "showTimings" : {
+        "1" : "01:00 pm"
+    }, 
+    "status" : "A"
+}
+{ 
+    "_id" : ObjectId("5fc8914550a558fa1a5f9577"), 
+    "title" : "The Old Guard", 
+    "genre" : "action", 
+    "length" : "2h 5m", 
+    "synopsys" : "A group of mercenaries, all centuries-old immortals with the ablity to heal themselves, discover someone is onto their secret, and they must fight to protect their freedom.", 
+    "image" : "the-old-guard-poster-wide.jpg", 
+    "availableUntil" : ISODate("2020-12-30T00:00:00.000+0000"), 
+    "showTimings" : {
+        "1" : "02:00 pm"
+    }, 
+    "status" : "A"
+}
+{ 
+    "_id" : ObjectId("5fc891e750a558fa1a5f9579"), 
+    "title" : "Enter the Fat Dragon", 
+    "genre" : "action", 
+    "length" : "1h 35m", 
+    "synopsys" : "A police officer investigates the mysterious death of a suspect who was in his custody during a routine transfer.", 
+    "image" : "Enter-the-Fat-Dragon-poster-1.jpg", 
+    "availableUntil" : ISODate("2020-12-24T00:00:00.000+0000"), 
+    "showTimings" : {
+        "1" : "09:00 am"
+    }, 
+    "status" : "A"
+}
+{ 
+    "_id" : ObjectId("5fc89bf21803e9096d493819"), 
+    "title" : "The Rhythm Section", 
+    "genre" : "action", 
+    "length" : "1h 50m", 
+    "synopsys" : "Stephanie Patrick veers down a path of self-destruction after a tragic plane crash kills her family. When Stephanie discovers it wasn't an accident, she turns to a former CIA operative who can help her find the culprits. But her quest to uncover the truth soon turns into a full-blown quest for revenge as Patrick decides to punish those responsible.", 
+    "image" : "therhythm2.jpeg", 
+    "availableUntil" : ISODate("2020-12-30T00:00:00.000+0000"), 
+    "showTimings" : {
+        "1" : "10:00 am", 
+        "2" : "02:00 pm"
+    }, 
+    "status" : "N"
+}

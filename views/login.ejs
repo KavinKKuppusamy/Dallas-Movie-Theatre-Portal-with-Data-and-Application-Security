@@ -1,0 +1,67 @@
+<%- include ('partials/header') %>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+  $('#submit').click(function(){
+    // console.log("here");
+    $('#error').empty();
+
+    var username = $("#userName").val();
+    var password = $("#inputPassword").val();
+
+    $.ajax({
+
+      url:'/login',
+      type: 'POST',
+      data: {"username": username,"password":password},
+      success : function(error){
+        window.location.pathname = "successlogin";
+      },
+      error : function(error){
+        var htmlToAppend = '<p style="background-color:red;"> Incorrect username/password </p>';
+          if(error.responseText == 'showAlert')
+            $('#error').append(htmlToAppend);
+      }
+
+    });
+
+  });
+});
+</script>
+
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin ">
+          <div class="card-body">
+            <h5 class="card-title text-center">Sign In</h5>
+            <div id="error"></div>
+            <form action="#" class="form-signin">
+              <div class="form-label-group">
+                <label for="userName">Username</label>
+                <input type="text" name="username" id="userName" class="form-control" placeholder="Username" required autofocus>
+                
+              </div>
+
+              <div class="form-label-group">
+                <label for="inputPassword">Password</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                
+              </div>
+
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                <label class="custom-control-label" for="customCheck1">Remember password</label>
+              </div>
+              <input id="submit" value="Sign In" class="btn btn-lg btn-primary btn-block text-uppercase" type="button"></input>
+              <hr class="my-4">
+              <a href="/register" class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Register
+          </a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<%- include ('partials/footer') %>

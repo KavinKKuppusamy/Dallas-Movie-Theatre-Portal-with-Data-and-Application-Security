@@ -1,0 +1,36 @@
+{ 
+    "_id" : ObjectId("5fc4a26b5c36b64048b35017"), 
+    "username" : "varadhanr", 
+    "password" : "$2a$12$yNelozuH0LCnBHicFcAaPudQMuZWnifh2G9OlDgnyX9AjRWBK/4Km", 
+    "email" : "varadhan.ramamoorthy@utdallas.edu", 
+    "firstname" : "Varadhan", 
+    "lastname" : "Ramamoorthy", 
+    "type" : "N"
+}
+{ 
+    "_id" : ObjectId("5fc598d30d2ac34e6a5bece3"), 
+    "username" : "jdoe", 
+    "password" : "$2a$12$C1cf2uHykbY8evBy1PFEsO.lPFy/KvMR4BS8SGmD0cf4xY1409s2C", 
+    "email" : "johndoe@gmail.com", 
+    "firstname" : "John", 
+    "lastname" : "Doe", 
+    "type" : "N"
+}
+{ 
+    "_id" : ObjectId("5fc5af37a0fa0d0a326753d8"), 
+    "username" : "admin", 
+    "password" : "$2a$12$swYA1BRu6lxWwtVafKDYSuD/y7tK.rMgOIl5zJ6iHQQkfWoL6zpHm", 
+    "email" : "admin@demo.com", 
+    "firstname" : "Admin", 
+    "lastname" : "Admin", 
+    "type" : "A"
+}
+{ 
+    "_id" : ObjectId("5fc89b521803e9096d493816"), 
+    "username" : "ehunt", 
+    "password" : "$2a$12$z2V0BCjqeKgcuuKYMmuQweuzfAdwtb0BsOu8lVtSO7Bz9OyL.1pi.", 
+    "email" : "ehunt@gmail.com", 
+    "firstname" : "Ethan", 
+    "lastname" : "Hunt", 
+    "type" : "N"
+}

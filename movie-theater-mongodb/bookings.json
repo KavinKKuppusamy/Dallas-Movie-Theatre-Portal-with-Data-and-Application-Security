@@ -1,0 +1,9 @@
+{ 
+    "_id" : ObjectId("5fc89bad1803e9096d493818"), 
+    "user_id" : "5fc89b521803e9096d493816", 
+    "show_id" : ObjectId("5fc48447a69e7a12ca724923"), 
+    "qty" : "3", 
+    "show_date" : "2020-12-22", 
+    "total_price" : NumberInt(54), 
+    "booking_date" : ISODate("2020-12-03T08:02:53.594+0000")
+}

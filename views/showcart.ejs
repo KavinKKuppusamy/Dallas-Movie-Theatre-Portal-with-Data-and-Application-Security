@@ -1,0 +1,120 @@
+<%- include ('partials/loginheader') %>
+
+<script>
+
+	var ticketCart;
+	$(document).ready(function(){
+
+		var shopCart = <%- JSON.stringify(cart) %>;
+		ticketCart = shopCart;
+		for(var i=0;i<shopCart.cart.length;i++){
+			// console.log(shopCart);
+			var show_id = shopCart.cart[i].show_id;
+			 $.ajax({
+
+			 		url : '/user/cart/display',
+			 		type : 'GET',
+			 		data : {"showid" : show_id},
+			 		success : function(data){
+			 			var htmlToAppend = '';
+						  htmlToAppend += '<div class="item"><div class="buttons"><span class="delete-btn" id="del-btn" value= '+show_id+'></span></div><div class="buttons"><span class="edit-btn" id="edit-btn" value= '+show_id+'></span></div><div class="image"><img src="/images/'+data['image']+'" style="width:100px; height:100px" alt="" /></div>' +
+						  '<div class="description"><span>Title :'+data['title']+'</span><span>Date :'+shopCart.cart[i].show_date+'</span><span>Show time :'+data['showTiming']+'</span><span>Quantity :'+shopCart.cart[i].qty+'</span></div>'+
+						  '<div class="total-price">$'+shopCart.cart[i].qty * data['price']+'</div></div>';
+
+			 			$("#shoppingcart").append(htmlToAppend);	
+
+			 			
+			 		},
+			 		async: false
+
+			 });
+
+		}
+
+		if(ticketCart != null && ticketCart.cart.length > 0){
+			$("#shoppingcart").append('<div class="checkout"><input type="button" id="checkout" class="btn btn-warning"  role="button" value="Proceed to Checkout"></input></div>');
+		}
+
+
+
+	});
+
+	$(document).ready(function(){
+
+		$('.delete-btn').click(function(){
+
+			var val = $(this).attr('value');
+			// console.log(val);
+			$.ajax({
+
+				url:'/user/cart',
+				type:'DELETE',
+				data:{"showid":val},
+				success : function(data){
+					console.log("came here");
+					alert('Item in the cart is delete');
+					window.location.href = '/user/cart';
+				}
+			})
+
+		});
+
+	})
+
+	$(document).ready(function(){
+
+		$('.edit-btn').click(function(){
+
+			var show_id = $(this).attr('value');
+			var newQty = prompt("Update the ticket quantity","");
+			console.log(show_id);
+			$.ajax({
+
+				url:'/user/cart/'+show_id,
+				type:'POST',
+				data:{"qty":newQty},
+				success : function(data){
+					alert('Item update successfully');
+					window.location.href='/user/cart';
+				}
+			})
+
+			// window.location.href= '/user/cart/'+val;
+		});
+
+	});
+
+	$(document).ready(function(){
+
+		$('#checkout').click(function(){
+			var proceed = confirm("Do you want to proceed with the bookings!");
+			if(proceed == true){
+			console.log("came here");
+			//proceed to checkout
+			$.ajax({
+				url:'/user/booking',
+				type:'POST',
+				data:{},
+				success : function(data){
+					// console.log(data);
+					alert('Successsfully Booked');
+					window.location.href='/successlogin';
+
+				}
+			});
+		}
+		});
+	});
+
+</script>
+<div class="shopping-cart" id="shoppingcart">
+  <!-- Title -->
+  <div class="title">
+    Ticket Cart
+  </div>
+
+
+
+</div>
+
+<%- include ('partials/footer') %>
