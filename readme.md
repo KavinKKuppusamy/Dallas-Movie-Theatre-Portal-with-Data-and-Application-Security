@@ -20,10 +20,6 @@ Application Admin: Theatre management/ Application Admin can login as admin and 
 Financial Team: The member in this team has access to customer transaction and can update the ticket price of a movie.
 Analytical Team: They can access both customer and employee information to derive insights on the key performance indicator metrics (KPI).
 
-Application Design
--------------------
-  ![image](https://user-images.githubusercontent.com/11616941/121824344-36576500-cc71-11eb-88d6-051fecda8c4a.png)
-
 Motivation behind Implementing Security Features
 -------------------------------------------------
 
@@ -32,18 +28,20 @@ We have implemented Security features in our application and motive behind imple
 •	Enforce enterprise-specific security policies for users and groups to authorize who can only to what.
 •	Prevent cybercriminals from accessing your private information while login to application.
 
-
+Feature Relevant to Data and Application Security : 
+---------------------------------------------------
+•	Verification code based 2-factor authentication
+•	Data encryption and masking on sensitive information such as credit card etc, 
+•	Query modification algorithm integrated with RBAC.
 
 Software to Install
 -------------------
-
 1) NodeJS
 2) MongoDB
 
 
 How to run
 ----------
-
 1) npm install
 2) nodemon
 3) Application can be opened in browser at localhost:3000
