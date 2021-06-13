@@ -22,7 +22,7 @@ Analytical Team: They can access both customer and employee information to deriv
 
 Application Design
 -------------------
-![image](https://user-images.githubusercontent.com/11616941/121824344-36576500-cc71-11eb-88d6-051fecda8c4a.png)
+  ![image](https://user-images.githubusercontent.com/11616941/121824344-36576500-cc71-11eb-88d6-051fecda8c4a.png)
 
 Motivation behind Implementing Security Features
 -------------------------------------------------
