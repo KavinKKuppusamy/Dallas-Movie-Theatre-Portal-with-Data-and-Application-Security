@@ -1,0 +1,189 @@
+<%- include ('partials/loginheader') %>
+<script>
+	function createTableForManager(tableData) {
+  var table = document.createElement('table');
+  table.classList.add('styled-table');
+  // table.append("<tr><td>First name</td><td>Last name</td><td>Email</td><td>Card type</td><td>Card Number</td></tr>");
+  var thead = document.createElement('thead');
+
+  var headrow = document.createElement('tr');
+
+  var headcell = document.createElement('td');
+    headcell.appendChild(document.createTextNode("First Name"));
+    headrow.appendChild(headcell);
+
+
+    var headcell = document.createElement('td');
+    headcell.appendChild(document.createTextNode("Last Name"));
+    headrow.appendChild(headcell);
+
+    var headcell = document.createElement('td');
+    headcell.appendChild(document.createTextNode("Email"));
+    headrow.appendChild(headcell);
+
+    var headcell = document.createElement('td');
+    headcell.appendChild(document.createTextNode("Card type"));
+    headrow.appendChild(headcell);
+
+    var headcell = document.createElement('td');
+    headcell.appendChild(document.createTextNode("Card Number"));
+    headrow.appendChild(headcell);
+
+    thead.append(headrow)
+    table.append(thead);
+
+
+
+  var tableBody = document.createElement('tbody');
+
+  tableData.forEach(function(rowData) {
+    var row = document.createElement('tr');
+
+    var cell = document.createElement('td');
+    cell.appendChild(document.createTextNode(rowData['firstname']));
+    row.appendChild(cell);
+
+    var cell = document.createElement('td');
+    cell.appendChild(document.createTextNode(rowData['lastname']));
+    row.appendChild(cell);
+
+    var cell = document.createElement('td');
+    cell.appendChild(document.createTextNode(rowData['email']));
+    row.appendChild(cell);
+
+    var cardType = rowData['cardType'];
+
+    if(typeof cardType == 'undefined'){
+    var cell = document.createElement('td');
+    cell.appendChild(document.createTextNode("Not available"));
+    row.appendChild(cell);
+}else{
+	var cell = document.createElement('td');
+    cell.appendChild(document.createTextNode(cardType));
+    row.appendChild(cell);
+}
+
+	var cardNum = rowData['cardNum'];
+
+    if(typeof cardNum == 'undefined'){
+    var cell = document.createElement('td');
+    cell.appendChild(document.createTextNode("Not available"));
+    row.appendChild(cell);
+}else{
+	var cell = document.createElement('td');
+    cell.appendChild(document.createTextNode(cardNum));
+    row.appendChild(cell);
+}
+
+
+
+    tableBody.appendChild(row);
+  });
+
+  table.appendChild(tableBody);
+  // document.body.appendChild(table);
+  $('.report').append(table);
+}
+
+
+
+function createTableForAnalyst(tableData) {
+  var table = document.createElement('table');
+  table.classList.add('styled-table');
+  // table.append("<tr><td>First name</td><td>Last name</td><td>Email</td><td>Card type</td><td>Card Number</td></tr>");
+  var thead = document.createElement('thead');
+
+  var headrow = document.createElement('tr');
+
+  var headcell = document.createElement('td');
+    headcell.appendChild(document.createTextNode("First Name"));
+    headrow.appendChild(headcell);
+
+
+    var headcell = document.createElement('td');
+    headcell.appendChild(document.createTextNode("Last Name"));
+    headrow.appendChild(headcell);
+
+    var headcell = document.createElement('td');
+    headcell.appendChild(document.createTextNode("Email"));
+    headrow.appendChild(headcell);
+
+    var headcell = document.createElement('td');
+    headcell.appendChild(document.createTextNode("Card type"));
+    headrow.appendChild(headcell);
+
+    thead.append(headrow)
+    table.append(thead);
+
+
+
+  var tableBody = document.createElement('tbody');
+
+  tableData.forEach(function(rowData) {
+    var row = document.createElement('tr');
+
+    var cell = document.createElement('td');
+    cell.appendChild(document.createTextNode(rowData['firstname']));
+    row.appendChild(cell);
+
+    var cell = document.createElement('td');
+    cell.appendChild(document.createTextNode(rowData['lastname']));
+    row.appendChild(cell);
+
+    var cell = document.createElement('td');
+    cell.appendChild(document.createTextNode(rowData['email']));
+    row.appendChild(cell);
+
+    var cardType = rowData['cardType'];
+
+    if(typeof cardType == 'undefined'){
+    var cell = document.createElement('td');
+    cell.appendChild(document.createTextNode("Not available"));
+    row.appendChild(cell);
+}else{
+	var cell = document.createElement('td');
+    cell.appendChild(document.createTextNode(cardType));
+    row.appendChild(cell);
+}
+
+
+
+    tableBody.appendChild(row);
+  });
+
+  table.appendChild(tableBody);
+  // document.body.appendChild(table);
+  $('.report').append(table);
+}
+</script>
+<script>
+	$(document).ready(function(){
+
+		$('#report').click(function(){
+
+			// console.log("hello");
+
+			$.ajax({
+				url : '/financial/report',
+			 	type : 'GET',
+			 	data : {},
+			 	success : function(data){
+			 		console.log(data);
+			 		var role = <%- JSON.stringify(role) %>;
+			 		// console.log(role);
+			 		if(role == "manager"){
+			 		createTableForManager(data);
+			 	}else if(role == "analyst"){
+			 		createTableForAnalyst(data);
+			 	}
+			 	}
+			})
+			
+		});
+	});
+</script>
+<div class="financialview" id="financialview">
+	<div class="report"><input type="button" id="report" class="btn btn-warning"  role="button" value="Click to generate financial report"></input></div>
+</div>
+
+<%- include ('partials/footer') %>

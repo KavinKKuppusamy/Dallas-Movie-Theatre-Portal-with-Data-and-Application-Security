@@ -1,0 +1,57 @@
+[{
+  "_id": {
+    "$oid": "608dfc0ec6522189495a6129"
+  },
+  "email": "paul@dmt.com",
+  "role": "manager",
+  "group": "application"
+},{
+  "_id": {
+    "$oid": "608dfc0ec6522189495a612c"
+  },
+  "email": "admin@dmt.com",
+  "role": "admin",
+  "group": "application"
+},{
+  "_id": {
+    "$oid": "608dfc0ec6522189495a612f"
+  },
+  "email": "matt@dmt.com",
+  "role": "developer",
+  "group": "application"
+},{
+  "_id": {
+    "$oid": "608dfc0ec6522189495a6132"
+  },
+  "email": "varadhan@dmt.com",
+  "role": "manager",
+  "group": "financial"
+},{
+  "_id": {
+    "$oid": "608dfc0ec6522189495a6135"
+  },
+  "email": "kavin@dmt.com",
+  "role": "analyst",
+  "group": "financial"
+},{
+  "_id": {
+    "$oid": "608dfc0ec6522189495a6138"
+  },
+  "email": "john@dmt.com",
+  "role": "associate ",
+  "group": "financial"
+},{
+  "_id": {
+    "$oid": "608dfc0ec6522189495a613b"
+  },
+  "email": "sam@dmt.com",
+  "role": "developer",
+  "group": "analytics"
+},{
+  "_id": {
+    "$oid": "608dfc0ec6522189495a613e"
+  },
+  "email": "ruth@dmt.com",
+  "role": "manager",
+  "group": "analytics"
+}]

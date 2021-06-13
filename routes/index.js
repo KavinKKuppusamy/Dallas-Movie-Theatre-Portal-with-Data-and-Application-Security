@@ -1,6 +1,16 @@
 var express = require('express');
 var session = require('express-session');
 var router = express.Router();
+
+//crypto for credit card
+const crypto = require('crypto');
+const algorithm = 'aes-256-cbc';
+var key = 'password';
+
+var speakeasy = require('speakeasy');
+var QRCode = require('qrcode');
+
+
 var monk = require('monk');
 var db = monk('localhost:27017/movie-theater');
 const { check, validationResult} = require("express-validator");
@@ -43,6 +53,9 @@ storage: multer.diskStorage({ //Setup where the user's file will go
   };
 //const app = express();
 //app.use(session({secret: 'catdog',saveUninitialized: true,resave: true}));
+
+
+
 
 
 /* GET home page. */
@@ -91,6 +104,84 @@ router.get('/successlogin',function(req,res,next){
 
 });
 
+router.get('/financialview',function(req,res,next){
+	var sess = req.session;
+	if(sess.username){
+	var cartCollection = db.get('user-cart');
+	console.log(sess.userid);
+	cartCollection.findOne({user_id: new ObjectId(sess.userid)},function(err,result){
+		// console.log(result);
+		if(err) throw err;
+		req.session.cartCount = Object.keys(result.cart).length;
+		res.render('financialview',{group : sess.group, role : sess.role,type : sess.type,user: sess.username,firstname:sess.firstname, cartCount :req.session.cartCount});
+		// res.end();
+	});
+	
+} else{
+	res.render('failurelogin');
+}
+
+});
+
+// get financial report
+router.get('/financial/report',function(req,res,next){
+
+	var sess = req.session;
+	if(sess.username && sess.group == 'financial'){
+		var responseJson = {};
+		var userCollection = db.get('users');
+		var bookings = db.get('bookings');
+		userCollection.find({},function(err,result){
+			// result = JSON.parse(JSON.stringify(result))
+			// res.send(result);
+			for(var i=0;i<result.length;i++){
+				var acutalRes = result[i];
+				var cardNum = acutalRes.cardNum;
+				var user_id = acutalRes._id;
+
+				if(cardNum){
+
+				var decipher = crypto.createDecipher(algorithm, key);
+				var decrypted = decipher.update(cardNum, 'hex', 'utf8') + decipher.final('utf8');
+				var masked = decrypted.replace(/\d(?=\d{4})/g, "*");
+				result[i].cardNum = masked;
+				}
+				// var totalTrans = 0;
+				// acutalRes.t = totalTrans;
+				
+				
+			}
+			responseJson = JSON.parse(JSON.stringify(result))
+			res.send(responseJson);
+		})
+
+		
+
+	}else{
+		res.redirect('/invaliduser');
+	}
+
+});
+
+router.get('/analyticsview',function(req,res,next){
+	var sess = req.session;
+	if(sess.username){
+	var cartCollection = db.get('user-cart');
+	console.log(sess.userid);
+	cartCollection.findOne({user_id: new ObjectId(sess.userid)},function(err,result){
+		// console.log(result);
+		if(err) throw err;
+		req.session.cartCount = Object.keys(result.cart).length;
+		res.render('analyticsview',{group : sess.group, role : sess.role,type : sess.type,user: sess.username,firstname:sess.firstname, cartCount :req.session.cartCount});
+		// res.end();
+	});
+	
+} else{
+	res.render('failurelogin');
+}
+
+});
+
 
 
 router.post('/login',function(req,res,next){
@@ -99,6 +190,7 @@ router.post('/login',function(req,res,next){
 	var collection = db.get('users');
 	var username = req.body.username;
 	var password = req.body.password;
+	var userToken = req.body.token;
 	collection.findOne({username:username},function(err,user){
 		if(err) throw err;
 		if(user == null){
@@ -111,10 +203,41 @@ router.post('/login',function(req,res,next){
 			sess.firstname = user.firstname;
 			sess.userid = user._id;
 			sess.type = user.type;
+
+			var secretkey = user.secretkey;
+            var verified = speakeasy.totp.verify({
+                                  secret: secretkey,
+                                  encoding: 'base32',
+                                  token: userToken
+                                });
 			// res.render('successlogin',{msg :'Yaaahoooo'});
 			// res.redirect('/successlogin');
 			// res.end();
-			res.send(200,'success');
+			var group = user.group;
+			var role = user.role;
+			var responseJson = {};
+
+			if(!verified){
+				res.send(500,'showAlert');
+                res.end();
+			} else {
+			// console.log(group);
+			if(typeof group == 'undefined' || group == null){
+				res.send(200,'success');
+			}else {
+				sess.group = group;
+				sess.role = role;
+			// console.log("came here");
+			// call financial view
+			// res.send(200,'success');
+			// res.send('302','redirect');
+			// res.render('financialview',{type: req.session.type,cartCount : req.session.cartCount,userid : req.session.userid, user: req.session.username,firstname:req.session.firstname});
+				responseJson['group'] = group;
+				responseJson['role'] = role;
+				res.send(responseJson);
+		}
+	}
+
 			
 		}else{
 			res.send(500,'showAlert');
@@ -135,45 +258,134 @@ router.get('/logout',(req,res) => {
 });
 
 router.post('/register',function(req,res,next){
-	var collection = db.get('users');
-	var cartCollection = db.get('user-cart');
-	var password = req.body.password;
-	// const salt = bcrypt.genSalt(10);
-	// const password = bcrypt.hash(req.body.password,salt);
-	bcrypt.hash(password,BCRYPT_SALT_ROUNDS).
-	then(function(hashedPassword){
+    var collection = db.get('users');
+    var cartCollection = db.get('user-cart');
+    var enterpriseTeamCollection = db.get('enterprise-team')
+    var password = req.body.password;
+    var responseJson = {}
+    // const salt = bcrypt.genSalt(10);
+    // const password = bcrypt.hash(req.body.password,salt);
+    bcrypt.hash(password,BCRYPT_SALT_ROUNDS).
+    then(function(hashedPassword){
 
-		collection.insert({
-		username: req.body.username,
-		password: hashedPassword,
-		email: req.body.email,
-		firstname: req.body.firstname,
-		lastname: req.body.lastname,
-		type: 'N'
+ 
 
-		},function(err,user){
-			if(err) throw err;
-			var cart = [];
-			cartCollection.insert({
-				user_id : user._id,
-				cart : cart,
-				lastUpdated : new Date((new Date()).toISOString())
-			},function(err,cart){
-				if(err) throw err;
-				// res.redirect('login');
-			});
+ 
 
-			res.redirect('login');
-		});
+        enterpriseTeamCollection.findOne({email:req.body.email},function(err,userdetails){
+            if (err) throw err;
+            userTeamDetails = userdetails
+            console.log("check",userdetails);
+            var secret = speakeasy.generateSecret({length: 20});
+            if(userdetails){
+                collection.insert({
+                username: req.body.username,
+                password: hashedPassword,
+                email: req.body.email,
+                firstname: req.body.firstname,
+                lastname: req.body.lastname,
+                group: userdetails.group,
+                role: userdetails.role,
+                secretkey: secret.base32,
+                type: 'A'
+
+ 
+
+                },function(err,user){
+                    if(err) throw err;
+                    var cart = [];
+                    cartCollection.insert({
+                        user_id : user._id,
+                        cart : cart,
+                        lastUpdated : new Date((new Date()).toISOString())
+                    },function(err,cart){
+                        if(err) throw err;
+                        // res.redirect('login');
+                    });
+                    //image_Var = sec.generate(image)
+
+ 
+
+                    QRCode.toDataURL(secret.otpauth_url, function(err, image_data) {
+                      //console.log(image_data); // A data URI for the QR code image
+                      responseJson['image_data'] = image_data;
+                      res.send(responseJson);
+                      //res.render('showqrcode.ejs',{image_data:image_data})
+                    });
+                    //res.redirect('qrview', sec.DATAtoUTL)
+                    //res.redirect('login');
+                    
+                });
+            }
+            else{
+
+ 
+
+                collection.insert({
+                username: req.body.username,
+                password: hashedPassword,
+                email: req.body.email,
+                firstname: req.body.firstname,
+                lastname: req.body.lastname,
+                group: null,
+                role: null,
+                secretkey: secret.base32,
+                type: 'N'
+
+ 
+
+                },function(err,user){
+                    if(err) throw err;
+                    var cart = [];
+                    cartCollection.insert({
+                        user_id : user._id,
+                        cart : cart,
+                        lastUpdated : new Date((new Date()).toISOString())
+                    },function(err,cart){
+                        if(err) throw err;
+                        // res.redirect('login');
+                    });
+
+ 
+
+                    QRCode.toDataURL(secret.otpauth_url, function(err, image_data) {
+                      //console.log(image_data); // A data URI for the QR code image
+                      responseJson['image_data'] = image_data;
+                      res.send(responseJson);
+                      //res.render('showqrcode.ejs',{image_data:image_data})
+                    });
+
+ 
+
+                    //image_Var = sec.generate(image)
+                    //res.redirect('qrview', sec.DATAtoUTL)
+                    //res.redirect('login');
+                });
+            }
+        });
 
 
-
-	}).catch(function(error){
+    }).catch(function(error){
         console.log("Error saving user: ");
         console.log(error);
         next();
     });
-	
+    
+});
+
+router.get('/user/booking',function(req,res,next){
+	if(req.session.userid){
+		var bookingCollection = db.get('bookings');
+		var user_id = req.session.userid;
+		bookingCollection.find({user_id: user_id},function(err,bookings){
+			if(err) throw err;
+			console.log(bookings);
+			res.render('showbookings',{cartCount : req.session.cartCount,firstname:req.session.firstname,bookings:bookings});
+		})
+
+	}else{
+		res.redirect('/invaliduser');
+	}
 });
 
 router.get('/movies/search',function(req,res,next){
@@ -318,7 +530,7 @@ router.get('/user/cart',function(req,res,next){
 		var user_id = req.session.userid;
 		collection.findOne({user_id : new ObjectId(user_id)},function(err,cart){
 			if(err) throw err;
-			res.render('showcart',{cartCount : req.session.cartCount,firstname:req.session.firstname,cart : cart});
+			res.render('showcart',{userid : req.session.userid,cartCount : req.session.cartCount,firstname:req.session.firstname,cart : cart});
 		});
 	}else{
 		res.redirect('/invaliduser');
@@ -382,6 +594,32 @@ router.post('/user/cart',function(req,res,next){
 
 });
 
+router.get('/user/:id',function(req,res,next){
+	if(req.session.userid){
+
+		var user_id = req.params.id;
+		var collection = db.get('users');
+
+		collection.findOne({_id : new ObjectId(user_id)},function(err,user){
+			// console.log(user.cardNum);
+			// var cardNum = user.cardNum;
+			var cardNum = user.cardNum;
+			if(cardNum){
+				var decipher = crypto.createDecipher(algorithm, key);
+				var decrypted = decipher.update(cardNum, 'hex', 'utf8') + decipher.final('utf8');
+				user.cardNum = decrypted;
+			}
+			// var decryptCard = decrypt(cardNum);
+			// user.cardNum = decryptCard;
+			res.json(user);
+
+		});
+
+	}else{
+		res.redirect('/invaliduser');
+	}
+});
+
 router.post('/user/cart/:id',function(req,res,next){
 	if(req.session.userid){
 
@@ -428,20 +666,7 @@ router.delete('/user/cart',function(req,res,next){
 
 });
 
-router.get('/user/booking',function(req,res,next){
-	if(req.session.userid){
-		var bookingCollection = db.get('bookings');
-		var user_id = req.session.userid;
-		bookingCollection.find({user_id: user_id},function(err,bookings){
-			if(err) throw err;
-			console.log(bookings);
-			res.render('showbookings',{cartCount : req.session.cartCount,firstname:req.session.firstname,bookings:bookings});
-		})
 
-	}else{
-		res.redirect('/invaliduser');
-	}
-});
 router.post('/user/booking',function(req,res,next){
 	if(req.session.userid){
 		var user_id = req.session.userid;
@@ -601,6 +826,43 @@ router.get('/admin/updatemovie/:id',function(req,res,next){
 		res.redirect('/invaliduser');
 	}
 })
+
+router.post('/user/card',function(req,res,next){
+
+	if(req.session.username){
+
+
+
+		var userCollection = db.get("users");
+		var user_id = req.body.id;
+		var cardType = req.body.cardType;
+		var cardNum = req.body.cardNum;
+		var cipher = crypto.createCipher(algorithm, key);  
+		var encrypted = cipher.update(cardNum, 'utf8', 'hex') + cipher.final('hex');
+		
+		
+
+		
+			userCollection.update({_id:user_id},
+
+				{
+			$set :{
+				'cardNum':encrypted,
+				'cardType' : cardType
+			}
+		},{upsert:true}
+
+				,function(err,user){
+			if(err) throw err;
+			res.send(200,'success');
+		})
+
+	}else{
+
+		res.redirect('/invaliduser');
+	}
+
+});
 
 router.post('/admin/updatemovie/:id',multer(multerConfig).single('image'),function(req,res,next){
 	if(req.session.username && req.session.type == 'A'){

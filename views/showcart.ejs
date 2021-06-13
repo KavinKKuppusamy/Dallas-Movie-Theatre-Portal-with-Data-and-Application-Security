@@ -7,6 +7,22 @@
 
 		var shopCart = <%- JSON.stringify(cart) %>;
 		ticketCart = shopCart;
+		var userId = shopCart.user_id;
+		var cardNumber = null;
+		var cardType = null;
+		$.ajax({
+
+			url : '/user/'+userId,
+			type : 'GET',
+			data : {},
+			success : function(data){
+				cardNumber = data['cardNum'];
+				cardType = data['cardType'];
+				// console.log(data);
+				// console.log(credit);
+			}
+		});
+		// console.log(shopCart.user_id);
 		for(var i=0;i<shopCart.cart.length;i++){
 			// console.log(shopCart);
 			var show_id = shopCart.cart[i].show_id;
@@ -32,6 +48,15 @@
 		}
 
 		if(ticketCart != null && ticketCart.cart.length > 0){
+
+			if(typeof cardNumber == 'undefined' || cardNumber == null){
+				// console.log("credit is undefined");
+				$("#shoppingcart").append('<div class="credcard"><label>Card type : </label><select name="credtype" id ="credtype"><option value="none" selected> Select card type </option><option value="credit"> Credit card </option><option value="debit"> Debit card </option></select><br><br><label>Credit Card Number : </label><input id="cardnum" type="text" placeholder="5555 5555 5555 5555" maxlength="16"/></div>');
+			}else{
+				var masked = cardNumber.replace(/\d(?=\d{4})/g, "*");
+				$("#shoppingcart").append('<div class="credcard"><label>Card type : </label><select name="credtype" id ="credtype"><option value='+cardType+'>'+cardType+' </option></select><br><br><label>Credit Card Number : </label><input type="text" id="cardnum" value = '+ masked+' maxlength="16"/></div>');
+			}
+
 			$("#shoppingcart").append('<div class="checkout"><input type="button" id="checkout" class="btn btn-warning"  role="button" value="Proceed to Checkout"></input></div>');
 		}
 
@@ -88,6 +113,21 @@
 
 		$('#checkout').click(function(){
 			var proceed = confirm("Do you want to proceed with the bookings!");
+			var shopCart = <%- JSON.stringify(cart) %>;
+			var userId = shopCart.user_id;
+			var cardType = document.getElementById("credtype").value;
+			var cardNum = document.getElementById("cardnum").value;
+			if(!cardNum.includes("****")){
+			$.ajax({
+				url:'/user/card',
+				type:'POST',
+				data:{"id":userId,"cardType":cardType,"cardNum":cardNum},
+				success : function(data){
+					console.log("Payment updated");
+				}
+			})
+		}
+
 			if(proceed == true){
 			console.log("came here");
 			//proceed to checkout

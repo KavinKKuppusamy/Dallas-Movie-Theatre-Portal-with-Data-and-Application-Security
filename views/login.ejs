@@ -9,17 +9,29 @@ $(document).ready(function(){
 
     var username = $("#userName").val();
     var password = $("#inputPassword").val();
+    var token = $("#token").val();
 
     $.ajax({
 
       url:'/login',
       type: 'POST',
-      data: {"username": username,"password":password},
-      success : function(error){
+      data: {"username": username,"password":password,"token":token},
+      success : function(data){
+        var group = data.group;
+        var role = data.role;
+
+        if(group == 'application' || typeof group == 'undefined' || group == null){
+
         window.location.pathname = "successlogin";
+
+      }else if(group == 'financial'){
+        window.location.pathname = "financialview";
+      }else if(group == 'analytics'){
+        window.location.pathname = "analyticsview";
+      }
       },
       error : function(error){
-        var htmlToAppend = '<p style="background-color:red;"> Incorrect username/password </p>';
+        var htmlToAppend = '<p style="background-color:red;"> Incorrect username/password or token </p>';
           if(error.responseText == 'showAlert')
             $('#error').append(htmlToAppend);
       }
@@ -47,6 +59,14 @@ $(document).ready(function(){
               <div class="form-label-group">
                 <label for="inputPassword">Password</label>
                 <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                
+              </div>
+
+
+              
+               <div class="form-label-group">
+                <label for="token">Your 6-digit Google Authenticator token</label>
+                <input type="text" name="token" id="token" class="form-control" placeholder="6-digit Google Authenticator token" pattern="[0-9]{6}" required /> 
                 
               </div>
 

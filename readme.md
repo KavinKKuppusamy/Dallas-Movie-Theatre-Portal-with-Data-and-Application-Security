@@ -1,8 +1,13 @@
-CS 6314.002 Web Programming Languages : Final Project
+CS 6348.001 Data and Application Security
 -----------------------------------------------------
 
-Submission By : Varadhan Ramamoorthy (vrr180003)
+Submission By : Varadhan Ramamoorthy (vrr180003), Kavin Kuppusamy (kxk190026)
 
+Software to Install
+-------------------
+
+1) NodeJS
+2) MongoDB
 
 
 How to run
@@ -13,9 +18,3 @@ How to run
 3) Application can be opened in browser at localhost:3000
 
 The Project includes mongo db json files as well.
-
-Admin username and password
----------------------------
-
-username : admin
-password : password

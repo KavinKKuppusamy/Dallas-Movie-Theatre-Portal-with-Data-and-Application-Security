@@ -1,52 +1,79 @@
 <%- include ('partials/header') %>
+
+ 
+
+
+<script type="text/javascript">
+    function popup(image) {
+       //var image = $(this).attr('src');
+        w2popup.open({
+            title: 'Scan the QRCode and Add to your Google Authenticator',
+            body: '<div class="w2ui-centered"><img src="'+image+'"></img></div>',
+            onClose : function (event) {
+              window.location.href = '/';
+            }
+        });
+    }
+</script>
+
+ 
+
+
 <script type="text/javascript">
 
+ 
+
 $(document).ready(function(){
-	$('#submit').click(function(){
-		console.log("here");
-		$('#userexist').empty();
+    $('#submit').click(function(){
+        console.log("here");
+        $('#userexist').empty();
 
-		var firstname = $("#firstName").val();
-		var lastname = $("#lastName").val();
-		var username = $('#userName').val();
-		var password = $('#inputPassword').val();
-		var email = $('#inputEmail').val();
+ 
 
-		$.ajax({
+        var firstname = $("#firstName").val();
+        var lastname = $("#lastName").val();
+        var username = $('#userName').val();
+        var password = $('#inputPassword').val();
+        var email = $('#inputEmail').val();
 
-			url:'/user',
-			type: 'GET',
-			data: {"username": username,"password":password, "email":email, "firstname":firstname, "lastname":lastname},
-			success : function(data){
-				console.log(data);
-			// console.log(data);
-			var htmlToAppend = '<p style="background-color:red;">';
-			if(data > 0){
-			htmlToAppend += 'Username or email already exist';
-			htmlToAppend += '</p>';
-			$('#userexist').append(htmlToAppend);
-			} else{
-				$.ajax({
-					url:'/register',
-					type: 'POST',
-					data: {"username": username,"password":password, "email":email, "firstname":firstname, "lastname":lastname},
-					success : function(data){
-						alert("User successfully registered! Click OK to login");
-						window.location.href = '/';
-					}
-				});
-			}
+ 
 
-		
+        $.ajax({
 
+ 
 
+            url:'/user',
+            type: 'GET',
+            data: {"username": username,"password":password, "email":email, "firstname":firstname, "lastname":lastname},
+            success : function(data){
+                console.log(data);
+            // console.log(data);
+            var htmlToAppend = '<p style="background-color:red;">';
+            if(data > 0){
+            htmlToAppend += 'Username or email already exist';
+            htmlToAppend += '</p>';
+            $('#userexist').append(htmlToAppend);
+            } else{
+                $.ajax({
+                    url:'/register',
+                    type: 'POST',
+                    data: {"username": username,"password":password, "email":email, "firstname":firstname, "lastname":lastname},
+                    success : function(data){
+            //console.log(data)
+            popup(data.image_data)
+                        //window.location.href = '/';
+                    }
+                });
+            }
+            }
 
-			
-			}
+ 
 
-		});
+        });
 
-	});
+ 
+
+    });
 });
 </script>
 <div class="container" id="registerform">
@@ -58,35 +85,47 @@ $(document).ready(function(){
             <div id="userexist"></div>
             <form action="#" name="registration" class="form-signin">
 
+ 
+
               <div class="form-label-group">
-              	<label >First name (required)</label>
+                  <label >First name (required)</label>
                 <input type="text" id="firstName" class="form-control" name="firstname" >
                 
               </div>
 
+ 
+
               <div class="form-label-group">
-              	<label >Last name (required)</label>
+                  <label >Last name (required)</label>
                 <input type="text" id="lastName" class="form-control" name="lastname">
                 
               </div>
 
+ 
+
               <div class="form-label-group">
-              	<label >Username (required)</label>
+                  <label >Username (required)</label>
                 <input type="text" id="userName" class="form-control" name="username">
                 
               </div>
 
+ 
+
               <div class="form-label-group">
-              	<label >Password (required)</label>
+                  <label >Password (required)</label>
                 <input type="password" id="inputPassword" class="form-control" name="password">
                 
               </div>
 
+ 
+
               <div class="form-label-group">
-              	<label >Email (required)</label>
+                  <label >Email (required)</label>
                 <input type="email" id="inputEmail" class="form-control" name="email">
                 
               </div>
+
+ 
 
               <div class="custom-control custom-checkbox mb-3">
                 <input type="checkbox" class="custom-control-input" id="customCheck1">
@@ -100,4 +139,3 @@ $(document).ready(function(){
       </div>
     </div>
   </div>
-<%- include ('partials/footer') %>
